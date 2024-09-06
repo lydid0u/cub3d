@@ -15,6 +15,13 @@
 void	free_exit(t_jeu *jeu)
 {
 	free_tab(jeu->value);
+	free_tab(jeu->map);
+	free_tab(jeu->map_spaced);
+	free_tab(jeu->ceiling_colors);
+	free_tab(jeu->floor_colors);
+	free_tab_tab(jeu->directions);
+	free_tab(jeu->file_map);
+
 }
 
 int	main(int argc, char **argv)
@@ -29,17 +36,15 @@ int	main(int argc, char **argv)
 		check_map_value(&jeu);
 		copy_game_map(&jeu);
 		parsing_map(&jeu);
-		int z = 0;
-		
-		z = error_handler(&jeu);
-		if (z)
-			printf("c la merde chef: %i\n", z);
+		if (error_handler(&jeu))
+			return(1);
 	}
 	else
 	{
 		printf("Erreur avec les arguments !\n");
 		return (1);
 	}
+	free_exit(&jeu);
+	return (0);
 }
-	// free_exit(&jeu);
 //dans la fonction empty line rajouter tab aussi

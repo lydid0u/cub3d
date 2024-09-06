@@ -66,5 +66,6 @@ int			copy_file(char *file, t_jeu *jeu);
 int			parsing_map(t_jeu *jeu);
 
 int	error_handler(t_jeu *jeu);
+void free_tab_tab(char ***tab);
 
 #endif

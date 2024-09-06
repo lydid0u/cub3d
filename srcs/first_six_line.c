@@ -104,7 +104,6 @@ int	check_map_value(t_jeu *jeu)
 		if (jeu->directions[i][2])
 			return (printf("Error\nToo many instructions on the line %s !\n",
 					"blabla"), 1);
-		// print_tab(jeu->directions[i]);
 		i++;
 	}
 	check_rgb_ceiling(jeu);

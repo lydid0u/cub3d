@@ -32,10 +32,10 @@ etape 3
 
 	-> boucler sur CHAQUE CHAR de la map
 		-> si jamais
-			au NORD, SUD, OUEST ou EST d'un ' ' il y a autre chose que un ' ' ou un '1'
+			X au NORD, SUD, OUEST ou EST d'un ' ' il y a autre chose que un ' ' ou un '1'
 				alors la map est invalide
-			si jamais le char est autre chose que '10NESW '
+			X si jamais le char est autre chose que '10NESW '
 				alors la map est invalide
-			si jamais la map contient deux fois un char 'NSEW'
+			X si jamais la map contient deux fois un char 'NSEW'
 				alors la map est invalide
 	c'est tout

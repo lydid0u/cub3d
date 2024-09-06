@@ -29,11 +29,27 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	if (tab)
 	{
-		free(tab[i]);
-		i++;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
+}
+
+void free_tab_tab(char ***tab)
+{
+    int i = 0;
+    while ((*tab)[i] != NULL)
+    {
+        free((*tab)[i]);
+        i++;
+    }
+    free(*tab);
+    *tab = NULL;
 }
 
 int	empty_line(char *str)
