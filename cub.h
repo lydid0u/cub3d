@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:03:43 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/08/31 19:56:59 by lboudjel         ###   ########.fr       */
+/*   Updated: 2024/09/06 19:09:22 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,14 @@ typedef struct s_jeu
 {
 	char	**map;
 	char	*value[6];
+	char	**file_map;
 	char	**directions[6];
 	char	**floor_colors;
 	char	**ceiling_colors;
+	char	**map_spaced;
 	int		nb_line_file;
+	int		nb_line_map;
+	size_t		longest_line;
 }			t_jeu;
 
 // utils.c
@@ -46,16 +50,21 @@ void		print_tab(char **tab);
 void		free_tab(char **tab);
 int			empty_line(char *str);
 
-// parsing_directions.c
-int			parsing(char *str);
+// parsing.c
+int			filename(char *str);
 
-// map_value.c
+// first_six_line.c
 int			copy_map_value(char *file, t_jeu *jeu);
 int			check_map_value(t_jeu *jeu);
 int			check_direction(char *str, t_jeu *jeu);
 
-// game_map.c
-int			copy_game_map(char *file, t_jeu *jeu);
+// copy_map.c
+int			copy_game_map(t_jeu *jeu);
 void		count_line(char *file, t_jeu *jeu);
+
+int			copy_file(char *file, t_jeu *jeu);
+int			parsing_map(t_jeu *jeu);
+
+int	error_handler(t_jeu *jeu);
 
 #endif

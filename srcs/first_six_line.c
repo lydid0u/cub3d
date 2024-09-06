@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_value.c                                        :+:      :+:    :+:   */
+/*   first_six_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 16:38:22 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/08/31 19:34:19 by lboudjel         ###   ########.fr       */
+/*   Updated: 2024/09/02 15:56:52 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	check_rgb_ceiling(t_jeu *jeu)
 	while (i != 3)
 	{
 		nb = ft_atoi(jeu->ceiling_colors[i]);
-		printf("nb %i\n", nb);
 		if (nb < 0 || nb >= 255)
 			printf("erreur %i\n", nb);
 		i++;
@@ -98,7 +97,6 @@ int	check_map_value(t_jeu *jeu)
 		i++;
 	}
 	i = 0;
-	printf("splited :\n");
 	while (i < 6)
 	{
 		if (!jeu->directions[i])
@@ -106,17 +104,12 @@ int	check_map_value(t_jeu *jeu)
 		if (jeu->directions[i][2])
 			return (printf("Error\nToo many instructions on the line %s !\n",
 					"blabla"), 1);
-		print_tab(jeu->directions[i]);
+		// print_tab(jeu->directions[i]);
 		i++;
 	}
 	check_rgb_ceiling(jeu);
 	check_rgb_floor(jeu);
 	return (0);
-}
-
-int	ft_isspace(char c)
-{
-	return (c == ' ' || c == '\t');
 }
 
 int	check_direction(char *str, t_jeu *jeu)

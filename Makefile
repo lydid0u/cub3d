@@ -14,8 +14,9 @@ DIR_SRCS		=	srcs
 
 DIR_OBJS		=	objs
 
-SRCS_NAMES		=	main.c parsing_directions.c map_value.c utils.c game_map.c\
+SRCS_NAMES		=	main.c parsing.c first_six_line.c utils.c copy_map.c\
 					gnl/get_next_line.c gnl/get_next_line_utils.c \
+					error.c \
 
 OBJS_NAMES		=	${SRCS_NAMES:.c=.o}
 
