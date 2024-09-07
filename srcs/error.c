@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 18:59:40 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/09/06 19:52:57 by lboudjel         ###   ########.fr       */
+/*   Updated: 2024/09/07 21:23:05 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	check_letters(t_jeu *jeu)
 {
-	int	i;
-	int j;
-	char **map = jeu->map_spaced;
+	int		i;
+	int		j;
+	char	**map;
 
+	map = jeu->map_spaced;
 	i = 0;
 	while (map[i])
 	{
@@ -35,36 +36,31 @@ int	check_letters(t_jeu *jeu)
 
 int	check_wall(t_jeu *jeu)
 {
-	int	col;
-	int row;
-	char **map = jeu->map_spaced;
+	int		col;
+	int		row;
 
 	col = 0;
-	while (map[col])
+	while (jeu->map_spaced[col])
 	{
 		row = 0;
-		while (map[col][row])
+		while (jeu->map_spaced[col][row])
 		{
-			if (map[col][row] == ' ')
+			if (jeu->map_spaced[col][row] == ' ')
 			{
-				// nord
 				if (col != 0)
-					if (!ft_strchr(" 1", map[col - 1][row]))
-						return (1);
-				// ouest
+					if (!ft_strchr(" 1", jeu->map_spaced[col - 1][row]))
+						return (printf("Error\n Missing a north wall\n"), 1);
 				if (row != 0)
-					if (!ft_strchr(" 1", map[col][row - 1]))
-						return (2);
-				// sud
+					if (!ft_strchr(" 1", jeu->map_spaced[col][row - 1]))
+						return (printf("Error\n Missing a west wall\n"), 2);
 				// si la ligne dapres nest pas null
-				if (map[col + 1])
-					if (!ft_strchr(" 1", map[col + 1][row]))
-						return (3);
-				// est
+				if (jeu->map_spaced[col + 1])
+					if (!ft_strchr(" 1", jeu->map_spaced[col + 1][row]))
+						return (printf("Error\n Missing a south wall\n"), 3);
 				// si le char dapres nest pas null
-				if (map[col][row + 1])
-					if (!ft_strchr(" 1", map[col][row + 1]))
-						return (4);
+				if (jeu->map_spaced[col][row + 1])
+					if (!ft_strchr(" 1", jeu->map_spaced[col][row + 1]))
+						return (printf("Error\n Missing a east wall\n"), 4);
 			}
 			row++;
 		}
@@ -75,11 +71,11 @@ int	check_wall(t_jeu *jeu)
 
 int	check_position(t_jeu *jeu)
 {
-	int	i;
-	int j;
-	int letter;
-	char **map;
-	
+	int		i;
+	int		j;
+	int		letter;
+	char	**map;
+
 	map = jeu->map_spaced;
 	i = 0;
 	letter = 0;
@@ -89,7 +85,10 @@ int	check_position(t_jeu *jeu)
 		while (map[i][j])
 		{
 			if (ft_strchr("WNES", map[i][j]))
+			{
+				jeu->start_position = map[i][j];
 				letter++;
+			}
 			if (letter > 1)
 				return (1);
 			j++;
@@ -99,15 +98,13 @@ int	check_position(t_jeu *jeu)
 	return (0);
 }
 
-int error_handler(t_jeu *jeu)
+int	error_handler(t_jeu *jeu)
 {
-	int z = 0;		
-	z = check_wall(jeu);
-	if (z)
-		return (printf("c la merde chef: %i\n", z), 1);
+	if (check_wall(jeu))
+		return (1);
 	if (check_letters(jeu))
-		return(printf("Error\nA char is wrong !\n"), 1);
+		return (printf("Error\nA char is wrong !\n"), 1);
 	if (check_position(jeu))
-		return(printf("Error\nTwo or more start position !\n"), 1);
+		return (printf("Error\nTwo or more start position !\n"), 1);
 	return (0);
 }

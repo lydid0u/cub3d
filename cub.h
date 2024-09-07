@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:03:43 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/09/06 19:09:22 by lboudjel         ###   ########.fr       */
+/*   Updated: 2024/09/07 21:11:57 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,16 @@
 typedef struct s_jeu
 {
 	char	**map;
-	char	*value[6];
+	char	**value;
 	char	**file_map;
-	char	**directions[6];
+	char	***directions;
 	char	**floor_colors;
 	char	**ceiling_colors;
 	char	**map_spaced;
+	char	start_position;
 	int		nb_line_file;
 	int		nb_line_map;
-	size_t		longest_line;
+	size_t	longest_line;
 }			t_jeu;
 
 // utils.c
@@ -65,7 +66,7 @@ void		count_line(char *file, t_jeu *jeu);
 int			copy_file(char *file, t_jeu *jeu);
 int			parsing_map(t_jeu *jeu);
 
-int	error_handler(t_jeu *jeu);
-void free_tab_tab(char ***tab);
+int			error_handler(t_jeu *jeu);
+void		free_tab_tab(char ***tab);
 
 #endif

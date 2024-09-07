@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first_six_line.c                                        :+:      :+:    :+:   */
+/*   first_six_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/27 16:38:22 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/09/02 15:56:52 by lboudjel         ###   ########.fr       */
+/*   Created: 2024/09/07 21:14:37 by lboudjel          #+#    #+#             */
+/*   Updated: 2024/09/07 21:43:43 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int	copy_map_value(char *file, t_jeu *jeu)
 	i = 0;
 	fd = open(file, O_RDONLY);
 	line = get_next_line(fd);
+	jeu->value = ft_calloc(sizeof(*jeu->value), 7);
+	if (!jeu->value)
+		return (1);
 	while (line)
 	{
 		if (line && !empty_line(line))
@@ -35,12 +38,15 @@ int	copy_map_value(char *file, t_jeu *jeu)
 		free(line);
 		line = get_next_line(fd);
 	}
+	jeu->value[i] = NULL;
 	close(fd);
 	free(line);
 	if (i != 6)
 		return (printf("Error\nA value is missing !\n"), free_tab(jeu->value), 1);
 	return (0);
 }
+	// printf("2file map %p\n", jeu->file_map);
+	// printf("jeuvalue %p %i\n", jeu->value[i], i);
 
 int	check_rgb_ceiling(t_jeu *jeu)
 {
@@ -97,13 +103,13 @@ int	check_map_value(t_jeu *jeu)
 		i++;
 	}
 	i = 0;
+	print_tab(jeu->directions[i]);
 	while (i < 6)
 	{
 		if (!jeu->directions[i])
-			return (printf("Error\nya un double jcrois %s !\n", "blabla"), 1);
-		if (jeu->directions[i][2])
-			return (printf("Error\nToo many instructions on the line %s !\n",
-					"blabla"), 1);
+			return (printf("Error\nya un double jcrois %i !\n", i), 1);
+		if ((!jeu->directions[i][1]) || jeu->directions[i][2])
+			return (printf("Error\nToo many instructions on the line !\n"), 1);
 		i++;
 	}
 	check_rgb_ceiling(jeu);
@@ -117,12 +123,14 @@ int	check_direction(char *str, t_jeu *jeu)
 	static char	*tab[7] = {"NO", "SO", "EA", "WE", "C", "F"};
 
 	i = 0;
+	jeu->directions = malloc(sizeof(char **) * 7);
 	while (tab[i])
 	{
-		if (!ft_strncmp(str, tab[i], ft_strlen(tab[i]))
-			&& ft_isspace(str[ft_strlen(tab[i])]))
+		if (!ft_strncmp(str, tab[i], ft_strlen(tab[i])) && ft_isspace(str[ft_strlen(tab[i])]))
 		{
+			printf("%i\n", i);
 			jeu->directions[i] = ft_split(str, ' ');
+			print_tab(jeu->directions[i]);
 		}
 		i++;
 	}

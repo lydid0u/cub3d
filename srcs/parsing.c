@@ -22,8 +22,7 @@ int	filename(char *str)
 		if (cub && ft_strlen(cub) == 4)
 			return (0);
 	}
-	printf("Nom de fichier pas valide !\n");
-	return (1);
+	return (printf("Error\nFilename's not valid !\n"), 1);
 }
 
 int malloc_space_map(t_jeu *jeu)
