@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 21:14:37 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/09/07 21:43:43 by lboudjel         ###   ########.fr       */
+/*   Updated: 2024/09/07 22:30:53 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	check_rgb_floor(t_jeu *jeu)
 	}
 	return (0);
 }
-
+// tab[0][0] == 'NO'
 int	check_map_value(t_jeu *jeu)
 {
 	int	i;
@@ -100,14 +100,17 @@ int	check_map_value(t_jeu *jeu)
 	while (jeu->value[i])
 	{
 		check_direction(jeu->value[i], jeu);
+		print_tab(jeu->directions[i]);
 		i++;
 	}
+	jeu->directions[i] = NULL;
 	i = 0;
-	print_tab(jeu->directions[i]);
 	while (i < 6)
 	{
 		if (!jeu->directions[i])
-			return (printf("Error\nya un double jcrois %i !\n", i), 1);
+		{
+			return (printf("Error\nya un double jcrois ou il manque un truc%i !\n", i), 1);
+		}
 		if ((!jeu->directions[i][1]) || jeu->directions[i][2])
 			return (printf("Error\nToo many instructions on the line !\n"), 1);
 		i++;
@@ -134,5 +137,6 @@ int	check_direction(char *str, t_jeu *jeu)
 		}
 		i++;
 	}
+	printf("str %s\n", str);
 	return (0);
 }
