@@ -25,7 +25,7 @@ int	filename(char *str)
 	return (printf("Error\nFilename's not valid !\n"), 1);
 }
 
-int malloc_space_map(t_jeu *jeu)
+int	malloc_space_map(t_jeu *jeu)
 {
 	int	i;
 
@@ -45,16 +45,16 @@ int malloc_space_map(t_jeu *jeu)
 	return (0);
 }
 
-
 int	parsing_map(t_jeu *jeu)
 {
 	int	i;
 
 	i = 0;
 	malloc_space_map(jeu);
-	while(jeu->map[i])
+	while (jeu->map[i])
 	{
-		ft_memcpy(&jeu->map_spaced[i + 1][1], jeu->map[i], ft_strlen(jeu->map[i]));
+		ft_memcpy(&jeu->map_spaced[i + 1][1], jeu->map[i],
+			ft_strlen(jeu->map[i]));
 		i++;
 	}
 	print_tab(jeu->map_spaced);

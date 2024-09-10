@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 18:59:40 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/09/07 21:23:05 by lboudjel         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:59:25 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,19 @@ int	check_position(t_jeu *jeu)
 	int		i;
 	int		j;
 	int		letter;
-	char	**map;
 
-	map = jeu->map_spaced;
 	i = 0;
 	letter = 0;
-	while (map[i])
+	while (jeu->map_spaced[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (jeu->map_spaced[i][j])
 		{
-			if (ft_strchr("WNES", map[i][j]))
+			if (ft_strchr("WNES", jeu->map_spaced[i][j]))
 			{
-				jeu->start_position = map[i][j];
+				jeu->start_position = jeu->map_spaced[i][j];
+				jeu->pos_i = i;
+				jeu->pos_j = j;
 				letter++;
 			}
 			if (letter > 1)

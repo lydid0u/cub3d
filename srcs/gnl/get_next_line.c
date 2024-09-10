@@ -108,13 +108,15 @@ char	*clean_stock(char *str, size_t i, size_t k)
 	return (free(str), clean);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, bool tofree)
 {
 	static char	*stock;
 	char		*buffer;
 	char		*line;
 	int			char_read;
 
+	if (tofree)
+		return (free(stock), NULL);
 	char_read = 1;
 	if (BUFFER_SIZE <= 0)
 		return (NULL);

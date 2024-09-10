@@ -6,7 +6,7 @@
 /*   By: lboudjel <lboudjel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:03:43 by lboudjel          #+#    #+#             */
-/*   Updated: 2024/09/07 21:11:57 by lboudjel         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:08:58 by lboudjel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ typedef struct s_jeu
 	char	**floor_colors;
 	char	**ceiling_colors;
 	char	**map_spaced;
+	int		pos_i;
+	int		pos_j;
 	char	start_position;
 	int		nb_line_file;
 	int		nb_line_map;
+	int		ok[7];
 	size_t	longest_line;
 }			t_jeu;
 
